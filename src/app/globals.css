@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #000000;
+  --color-carbon: #060607;
+  --color-panel: #0a0a0c;
+  --color-raise: #101012;
+  --color-ink: #ffffff;
+  --color-dim: #b4b4ba;
+  --color-mute: #74747c;
+  --color-faint: #3c3c42;
+  --color-line: rgba(255, 255, 255, 0.1);
+  --color-line-strong: rgba(255, 255, 255, 0.26);
+
+  --font-sans: "Helvetica Neue", Helvetica, Arial, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  html {
+    background-color: #000;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: #000;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #fff;
+    color: #000;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #56565e;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.16);
+  }
+}
+
+@layer utilities {
+  .label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #74747c;
+  }
+
+  .label-bright {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.86);
+  }
+
+  .data {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  .rule {
+    height: 1px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .panel {
+    background: #060607;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .void-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 84px 84px;
+  }
+
+  .vignette {
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(0, 0, 0, 0) 60%
+    );
+  }
+
+  .live-dot {
+    animation: veto-pulse 1.7s ease-in-out infinite;
+  }
+
+  .rise {
+    animation: veto-rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .marquee-track {
+    animation: veto-marquee 46s linear infinite;
+  }
+
+  .glow-edge {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .btn-solid {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #000000;
+    border: 1px solid #ffffff;
+    transition:
+      background-color 150ms ease,
+      color 150ms ease;
+  }
+
+  .btn-solid:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+  .btn-solid:disabled {
+    opacity: 0.4;
+    background-color: #000000;
+    color: #ffffff;
+  }
+}
+
+@keyframes veto-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.22;
+  }
+}
+
+@keyframes veto-rise {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes veto-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot,
+  .rise,
+  .marquee-track {
+    animation: none;
+  }
+}
